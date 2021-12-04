@@ -83,6 +83,7 @@ import './index.css';
       const history = this.state.history;
       const current = history[this.state.stepNumber];
       const winner = calculateWinner(current.squares);
+      const isDraw = calculateDraw(current.squares);
       
       const moves = history.map((step, move) => {
         const desc = move ? 
@@ -98,6 +99,9 @@ import './index.css';
       let status;
       if(winner) {
         status = 'Winner: ' + winner;
+      }
+      else if(isDraw) {
+        status = 'Its a DRAW';
       }
       else {
         status = 'Next player: ' + this.state.xIsNext ? 'X' : '0';
@@ -146,4 +150,16 @@ import './index.css';
       }
     }
     return null;
+  }
+
+  function calculateDraw(squares) {
+    for(let i=0; i < squares.length; i++) {
+      if(squares[i]) {
+
+      }
+      else {
+        return false;
+      }
+    }
+    return true;
   }
