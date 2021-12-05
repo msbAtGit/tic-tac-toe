@@ -52,13 +52,17 @@ import './index.css';
         }],
         stepNumber: 0,
         xIsNext: true,
+        historyIndex: Array(9).fill(null),
       };
     }
 
     handleClick(i) {
       const history = this.state.history.slice(0, this.state.stepNumber + 1);
+      const historyIndex = this.state.historyIndex.slice(0,this.state.stepNumber + 1);
       const current = history[history.length - 1];
       const squares = current.squares.slice();
+      // const currentIndex = historyIndex[history.length - 1];
+      
       if(calculateWinner(squares) || squares[i]) {
         return;
       }
@@ -69,6 +73,7 @@ import './index.css';
         }]),
         stepNumber:history.length,
         xIsNext: !this.state.xIsNext,
+        historyIndex: historyIndex.concat(i),
       });
     }
 
@@ -96,15 +101,17 @@ import './index.css';
         );
       });
 
-      let status;
+      var status;
       if(winner) {
         status = 'Winner: ' + winner;
       }
-      else if(isDraw) {
-        status = 'Its a DRAW';
-      }
       else {
-        status = 'Next player: ' + this.state.xIsNext ? 'X' : '0';
+        status = "Next player: " + (this.state.xIsNext ? 'X' : '0');
+      }
+      
+
+      if(isDraw) {
+         status = 'Its a DRAW';
       }
 
       return (
@@ -116,7 +123,7 @@ import './index.css';
             />
           </div>
           <div className="game-info">
-            <div>{status}</div>
+            <div className="game-status">{status}</div>
             <ol>{moves}</ol>
           </div>
         </div>
