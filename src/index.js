@@ -105,14 +105,15 @@ import './index.css';
       if(winner) {
         status = 'Winner: ' + winner;
       }
+      else if(isDraw) {
+        status = 'Its a DRAW';
+      }
       else {
         status = "Next player: " + (this.state.xIsNext ? 'X' : '0');
       }
       
 
-      if(isDraw) {
-         status = 'Its a DRAW';
-      }
+      
 
       return (
         <div className="game">
