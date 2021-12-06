@@ -91,8 +91,10 @@ import './index.css';
       const isDraw = calculateDraw(current.squares);
       
       const moves = history.map((step, move) => {
+        const colMove = (this.state.historyIndex[move]  % 3 ) + 1;
+        const rowMove = Math.trunc((this.state.historyIndex[move]  / 3 ) + 1);
         const desc = move ? 
-          'Go to move#' + move:
+          `Go to move#${move} (${rowMove}, ${colMove})`:
           'Go to game start';
         return (
           <li key={move}>
@@ -100,6 +102,7 @@ import './index.css';
           </li>
         );
       });
+      
 
       var status;
       if(winner) {
@@ -112,9 +115,6 @@ import './index.css';
         status = "Next player: " + (this.state.xIsNext ? 'X' : '0');
       }
       
-
-      
-
       return (
         <div className="game">
           <div className="game-board">
